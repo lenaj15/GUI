@@ -1,15 +1,12 @@
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.jdom.xpath.XPath;
 import org.joda.time.DateTime;
 
 public class Parser {
@@ -36,6 +33,7 @@ public class Parser {
 
 		Element root = document.getRootElement();
 
+		@SuppressWarnings("rawtypes")
 		List listOfChildren = root.getChildren();
 
 		for (int i = 0; i < listOfChildren.size(); i++) {

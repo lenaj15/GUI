@@ -1,20 +1,24 @@
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
+import html.Tag;
 
-import org.joda.time.DateTime;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
-import html.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.joda.time.DateTime;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
  
 public class ReadXMLFile {
  
+	@SuppressWarnings("unchecked")
 	public static void main(String argv[]) {
  
 		try {
@@ -25,7 +29,7 @@ public class ReadXMLFile {
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 			
-			NodeList nList = doc.getElementsByTagName("event");
+//			NodeList nList = doc.getElementsByTagName("event");
 			
 			Tag html = new Tag("html");
 			Tag head = new Tag("head");

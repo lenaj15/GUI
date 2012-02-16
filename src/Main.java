@@ -1,42 +1,47 @@
 import html.Tag;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 
-import org.jdom.*;
-import org.jdom.input.DOMBuilder;
-import org.jdom.input.SAXBuilder;
-import org.jdom.xpath.XPath;
 import org.joda.time.DateTime;
 
 
 public class Main {
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException{
-		ArrayList<CalendarEvent> list = Parser.parseFile("NFL.xml");
 		
-		//Map<Object, ArrayList<CalendarEvent>> map = Filter.filterByKeyword(list, "Bears");
+		// Parse the file
+		System.out.println("Please select a file to parse (don't include .xml)");
+		Scanner in1 = new Scanner(System.in);
+		String xmlFile = in1.nextLine();
+		ArrayList<CalendarEvent> list = Parser.parseFile(xmlFile + ".xml");
 		
-		/* //Test multiple keywords
-		 * ArrayList<String> test = new ArrayList<String>();
-		test.add("Bears");
-		test.add("Lions");
-		Map<Object, ArrayList<CalendarEvent>> map = Filter.filterByKeywords(list, test);*/
+		// Choose the method of filtering
+		System.out.println("Please select and option (keyword or date):");
+		Scanner in2 = new Scanner(System.in);
+		String filterOption = in2.nextLine();
 		
-		//System.out.println("DEJLASJ FLDKSAJFLASDJ FLKSDJFLKAS JDF"+ new DateTime(2011, 12, 12, 9, 0).getHourOfDay()+" fdfdfa "+  new DateTime(2011, 12, 12, 9, 0).getMillis());
-		Map<Object, ArrayList<CalendarEvent>> map = Filter.filterByDates(list, new DateTime(2010, 11, 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
+		Map<Object, ArrayList<CalendarEvent>> outputMap = new TreeMap<Object, ArrayList<CalendarEvent>>();
+		if (filterOption.equals("keyword"))
+		{
+			ArrayList<String> test = new ArrayList<String>();
+			test.add("Bears");
+			test.add("Lions");
+			outputMap = Filter.filterByKeywords(list, test);
+		}
+		else if (filterOption.equals("date"))
+		{
+			outputMap = Filter.filterByDates(list, new DateTime(2010, 11, 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
+		}
 		
-		//System.out.println(list.size());
-		//System.out.println(map.get("Bears"));
 		
-		Map<Object, ArrayList<CalendarEvent>> outputMap = map;
-		
+		// Generate HTML file
 		Tag html = new Tag("html");
 		Tag head = new Tag("head");
 		Tag header = new Tag("h1");
@@ -83,7 +88,6 @@ public class Main {
 		PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\atm15\\Desktop\\output.html"));
 		pw.println(html.toString());
 		pw.close();
-		//Parser.parseFile("NFL.xml");
 	}
 
 }
