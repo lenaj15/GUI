@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.joda.time.DateTime;
 
+import event.CalendarEvent;
+
 
 public class Filter {
 

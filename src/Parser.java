@@ -9,6 +9,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.joda.time.DateTime;
 
+import event.CalendarEvent;
+
 public class Parser {
 	
 	
