@@ -11,6 +11,8 @@ import java.util.TreeMap;
 import org.joda.time.DateTime;
 
 import event.CalendarEvent;
+import filter.Filter;
+import filter.*;
 
 
 public class Main {
@@ -35,11 +37,12 @@ public class Main {
 			ArrayList<String> test = new ArrayList<String>();
 			test.add("Bears");
 			test.add("Lions");
-			outputMap = Filter.filterByKeywords(list, test);
+			
+			outputMap = new FilterByKeywords().filter(list, test);
 		}
 		else if (filterOption.equals("date"))
 		{
-			outputMap = Filter.filterByDates(list, new DateTime(2010, 11, 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
+			outputMap = new FilterByDates().filter(list, new DateTime(2010, 11, 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
 		}
 		
 		
