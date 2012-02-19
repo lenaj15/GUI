@@ -1,4 +1,5 @@
 import html.Tag;
+import html_generator.HtmlGenerator;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,8 +17,8 @@ import org.joda.time.DateTime;
 import parser.DukeCalParser;
 
 import event.CalendarEvent;
-import filter.Filter;
 import filter.*;
+import html_generator.*;
 
 
 public class Main {
@@ -35,67 +36,16 @@ public class Main {
 		String filterOption = in2.nextLine();
 		
 		Map<Object, ArrayList<CalendarEvent>> outputMap = new TreeMap<Object, ArrayList<CalendarEvent>>();
-		if (filterOption.equals("keyword"))
-		{
-			ArrayList<String> test = new ArrayList<String>();
-			test.add("Bears");
-			test.add("Lemur");
-			
-			outputMap = new FilterByKeywords().filter(list, test);
-		}
-		else if (filterOption.equals("date"))
-		{
-			outputMap = new FilterByDates().filter(list, new DateTime(2010, 11, 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
-		}
+
+		String outputOption = "horizontal";
 		
+		HtmlGenerator tableCreator = new HtmlHorizontalTable(outputMap);
+		HtmlGenerator headerCreator = new HtmlVerticalHeaders(outputMap);
 		
-		// Generate HTML file
-		Tag html = new Tag("html");
-		Tag head = new Tag("head");
-		Tag header = new Tag("h1");
-		header.add("Tivoo");
-		head.add(header);
-		Tag body = new Tag("body");
-		
-		Tag table = new Tag("table", "border=5 cellpadding=3 cellspacing=0 width=500");
-		body.add(table);
-		
-		for (Object key: outputMap.keySet())
-		{
-			Tag tr = new Tag("tr", "align=center");
-			Tag firstEntry = new Tag("td", "align=center valign=center bgcolor=#9c9c9c");
-			firstEntry.add(key.toString());
-			tr.add(firstEntry);
-			for (CalendarEvent value: outputMap.get(key))
-			{
-				Tag subEntry = new Tag("td", "align=center valign=center bgcolor=#eeeeee");
-				subEntry.add(value.getMyTitle()); // or value.getSummaries();
-				tr.add(subEntry);
-			}
-			table.add(tr);
-		}
-		
-		// Vertical header creation
-		for (Object key: outputMap.keySet())
-		{
-			Tag h1 = new Tag("h1", "align=center");
-			h1.add(key.toString());
-			body.add(h1);
-			for (CalendarEvent value: outputMap.get(key))
-			{
-				Tag h4 = new Tag("h4", "align=center");
-				h4.add(value.getMyTitle()); // or value.getSummaries();
-				body.add(h4);
-			}
-		}
-		
-		html.add(head);
-		html.add(body);
-		System.out.println(html);
-		
-		PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\atm15\\Desktop\\output.html"));
-		pw.println(html.toString());
-		pw.close();
+		if (outputOption.equals("horizontal"))
+			tableCreator.generateOutput();
+		else if (outputOption.equals("vertical"))
+			headerCreator.generateOutput();
 	}
 
 }
