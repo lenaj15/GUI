@@ -3,11 +3,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.xpath.XPath;
+
 import org.joda.time.DateTime;
+
 
 import event.CalendarEvent;
 
@@ -15,7 +20,7 @@ public class Parser {
 	
 	
 
-	public static ArrayList<CalendarEvent> parseFile(String filename) {
+	public static ArrayList<CalendarEvent> parseFile(String filename) throws JDOMException {
 		
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
 		
@@ -33,6 +38,29 @@ public class Parser {
 			e.printStackTrace();
 		}
 
+		
+		//testing xpath
+		//XPath testPath = new XPath();
+		
+		/*XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xPath = xPathFactory.newXPath();
+		String expression = "//summary";
+		XPathExpression xPathExpression = xPath.compile(expression);
+		Object result = xPathExpression.evaluate(document);*/
+		XPath xpath = XPath.newInstance("/events/event/summary");
+		XPath xpath2 = XPath.newInstance("/events/event/description");
+		
+		List results = xpath.selectNodes(document);
+		List results2 = xpath2.selectNodes(document);
+
+
+		Element first = (Element) results.get(0);
+		Element second = (Element) results2.get(0);
+	
+		System.out.println(first.getValue());
+		System.out.println(second.getValue());
+		
+		
 		Element root = document.getRootElement();
 
 		@SuppressWarnings("rawtypes")
@@ -70,7 +98,7 @@ public class Parser {
 				
 				list.add(thisEvent);
 
-				System.out.println(thisEvent);
+				//System.out.println(thisEvent);
 
 			} else if (filename.contains("NFL")) {
 				subject = tempElement.getChild("Col1").getValue();

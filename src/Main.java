@@ -8,7 +8,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.xml.xpath.XPathExpressionException;
+
+import org.jdom.JDOMException;
 import org.joda.time.DateTime;
+
+import parser.DukeCalParser;
 
 import event.CalendarEvent;
 import filter.Filter;
@@ -18,13 +23,11 @@ import filter.*;
 public class Main {
 	
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, JDOMException{
 		
-		// Parse the file
-		System.out.println("Please select a file to parse (don't include .xml)");
-		Scanner in1 = new Scanner(System.in);
-		String xmlFile = in1.nextLine();
-		ArrayList<CalendarEvent> list = Parser.parseFile(xmlFile + ".xml");
+		//this is the new parser
+		DukeCalParser calendarParser = new DukeCalParser("dukecal.xml");
+		ArrayList<CalendarEvent> list = calendarParser.parseFile();
 		
 		// Choose the method of filtering
 		System.out.println("Please select and option (keyword or date):");
@@ -36,7 +39,7 @@ public class Main {
 		{
 			ArrayList<String> test = new ArrayList<String>();
 			test.add("Bears");
-			test.add("Lions");
+			test.add("Lemur");
 			
 			outputMap = new FilterByKeywords().filter(list, test);
 		}
