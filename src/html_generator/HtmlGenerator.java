@@ -12,8 +12,8 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public abstract class HtmlGenerator {
 	Map<Object, ArrayList<CalendarEvent>> outputMap;
-	public final static String filepath = "C:\\Users\\atm15\\Desktop\\";
-	public final static String folder = "subpages\\";
+	public final static String filepath = "";
+	public final static String folder = "subpages";
 	
 	public abstract void generateOutput() throws IOException;
 	public abstract Tag generateKeyEntry(Object o);

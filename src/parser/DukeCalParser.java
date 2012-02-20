@@ -23,7 +23,11 @@ public class DukeCalParser extends TivooParser {
 	@Override
     public DateTime parseDate(String input) {
 
-	    return null;
+		input = input.substring(0, 4) + "-" + input.substring(4, 6)
+		        + "-" + input.substring(6, 11) + ":"
+		        + input.substring(11, 13) + ":" + input.substring(13);
+
+		return new DateTime(input);
     }
 
 	@Override

@@ -88,9 +88,9 @@ abstract public class TivooParser {
 			DateTime start, end;
 			
 			Element titleElement = (Element) readInformation.get(0).get(i);
-			Element descriptionElement = (Element) readInformation.get(0).get(i);
-			Element startTimeElement = (Element) readInformation.get(0).get(i);
-			Element endTimeElement = (Element) readInformation.get(0).get(i);
+			Element descriptionElement = (Element) readInformation.get(1).get(i);
+			Element startTimeElement = (Element) readInformation.get(2).get(i);
+			Element endTimeElement = (Element) readInformation.get(3).get(i);
 			
 			title = titleElement.getValue();
 			description = descriptionElement.getValue();

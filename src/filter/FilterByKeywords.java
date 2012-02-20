@@ -14,7 +14,7 @@ public class FilterByKeywords extends Filter{
 		for (String s: wordList){
 			ArrayList<CalendarEvent> wordFiltered = new ArrayList<CalendarEvent>();
 			for (CalendarEvent e : lists){
-				if (e.getMyTitle().equals(s))
+				if (e.getMyTitle().contains(s))
 					wordFiltered.add(e);
 			}
 			eventMap.put(s, wordFiltered);
