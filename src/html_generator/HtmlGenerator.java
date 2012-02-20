@@ -1,8 +1,7 @@
-package html_generator;
-
+package html_generator; 
 import html.Tag;
-import event.*;
 
+import event.CalendarEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public abstract class HtmlGenerator {
 	Map<Object, ArrayList<CalendarEvent>> outputMap;
-	public final static String filepath = "/Users/bryanyang/Documents/cs108/Tivoo";
+	public final static String filepath = "C:\\Users\\atm15\\Desktop\\";
 	public final static String folder = "subpages\\";
 	
 	public abstract void generateOutput() throws IOException;
@@ -51,9 +50,14 @@ public abstract class HtmlGenerator {
 		head.add(header);
 		Tag body = new Tag("body");
 		
-		Tag h4 = new Tag("h4");
-		h4.add("Event summary: " + event.getMySummaries());
-		body.add(h4);
+		Tag title = generateDetail("Title", event.getMyTitle());
+		body.add(title);
+		
+		Tag summary = generateDetail("Event summary", event.getMySummaries());
+		body.add(summary);
+		
+		Tag time = generateDetail("Date", event.getMyDatesString());
+		body.add(time);
 		
 		html.add(head);
 		html.add(body);
@@ -63,6 +67,13 @@ public abstract class HtmlGenerator {
 		pw.close();
 	}
 	
+	public static Tag generateDetail(String item, String info)
+	{
+		Tag detail = new Tag("h4");
+		detail.add(item + ": " + info);
+		return detail;
+	}
+	
 	public void printResult(Tag html) throws IOException
 	{
 		PrintWriter pw = new PrintWriter(new FileWriter(filepath + "output.html"));
@@ -70,4 +81,3 @@ public abstract class HtmlGenerator {
 		pw.close();
 	}
 }
-

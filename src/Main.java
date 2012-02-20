@@ -36,7 +36,21 @@ public class Main {
 		String filterOption = in2.nextLine();
 		
 		Map<Object, ArrayList<CalendarEvent>> outputMap = new TreeMap<Object, ArrayList<CalendarEvent>>();
-
+		
+		if (filterOption.equals("keyword"))
+		{
+			ArrayList<String> test = new ArrayList<String>();
+			test.add("Bears");
+			test.add("Lions");
+			
+			outputMap = new FilterByKeywords().filter(list, test);
+		}
+		else if (filterOption.equals("date"))
+		{
+			outputMap = new FilterByDates().filter(list, new DateTime(2010, 11, 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
+		}
+		
+		
 		String outputOption = "horizontal";
 		
 		HtmlGenerator tableCreator = new HtmlHorizontalTable(outputMap);

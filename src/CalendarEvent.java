@@ -1,4 +1,6 @@
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 
 public class CalendarEvent {
@@ -21,6 +23,13 @@ public class CalendarEvent {
 	public String getMySummaries() {
     	return mySummaries;
     }
+	
+	public String getMyDatesString() {
+		DateTimeFormatter fmt = DateTimeFormat.longDateTime();
+		String start = fmt.print(myStartTime);
+		String end = fmt.print(myEndTime);
+		return start + " - " + end;
+	}
 
 	
 	public String toString(){
