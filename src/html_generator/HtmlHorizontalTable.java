@@ -4,15 +4,14 @@ import html.Tag;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import event.CalendarEvent;
 
 @SuppressWarnings("unchecked")
 public class HtmlHorizontalTable extends HtmlGenerator {
 
-	public HtmlHorizontalTable(Map<Object, ArrayList<CalendarEvent>> map) {
-		super(map);
+	public HtmlHorizontalTable(ArrayList<CalendarEvent> list) {
+		super(list);
 	}
 
 	public void generateOutput() throws IOException {

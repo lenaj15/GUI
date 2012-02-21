@@ -11,19 +11,6 @@ import event.CalendarEvent;
 public class Filter {
 
 
-	public static Map <Object, ArrayList<CalendarEvent>> filterByKeyword(ArrayList <CalendarEvent> lists, String word){
-		Map <Object, ArrayList<CalendarEvent>> eventMap = new HashMap <Object, ArrayList<CalendarEvent>> ();
-		ArrayList<CalendarEvent> wordFiltered = new ArrayList<CalendarEvent>();
-		for (CalendarEvent e: lists){
-
-			if (e.getMyTitle().contains(word)) { 
-				
-				wordFiltered.add(e);
-			}
-		}
-		eventMap.put(word, wordFiltered);
-		return eventMap;
-	}
 	
 	//The map key will be the starting time of the event
 	public static Map <Object, ArrayList<CalendarEvent>> filterByDates(ArrayList <CalendarEvent> lists, DateTime start, DateTime end){

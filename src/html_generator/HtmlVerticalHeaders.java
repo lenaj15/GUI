@@ -4,15 +4,14 @@ import html.Tag;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import event.CalendarEvent;
 
 @SuppressWarnings("unchecked")
 public class HtmlVerticalHeaders extends HtmlGenerator {
 
-	public HtmlVerticalHeaders(Map<Object, ArrayList<CalendarEvent>> map) {
-		super(map);
+	public HtmlVerticalHeaders(ArrayList<CalendarEvent> list) {
+		super(list);
 	}
 
 	public void generateOutput() throws IOException {

@@ -1,8 +1,5 @@
 package event;
 
-import java.util.Collections;
-import java.util.Comparator;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -12,12 +9,14 @@ public class CalendarEvent {
 	
 	public String myTitle, mySummaries;
 	public DateTime myStartTime, myEndTime;
+	public boolean isOutput;
 	
 	public CalendarEvent(String title, DateTime start, DateTime end, String summaries){	
 		myTitle = title;
 		myStartTime = start;
 		myEndTime = end;
 		mySummaries = summaries;	
+		isOutput = true;
 	}
 
 	public String getMyTitle() {

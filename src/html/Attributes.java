@@ -1,6 +1,7 @@
 package html;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Attributes extends LinkedList {
 

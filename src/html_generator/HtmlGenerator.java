@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 import event.CalendarEvent;
 
@@ -27,9 +28,28 @@ public abstract class HtmlGenerator {
 	 * 
 	 * @param map
 	 */
-	public HtmlGenerator(Map<Object, ArrayList<CalendarEvent>> map)
+	public HtmlGenerator(ArrayList<CalendarEvent> list)
 	{
-		outputMap = map;
+		outputMap = new TreeMap<Object, ArrayList<CalendarEvent>>();
+		for (CalendarEvent e: list)
+		{
+			String date = e.getMyDatesString();
+			if (e.isOutput)
+			{
+				if (outputMap.keySet().contains(date))
+				{
+					ArrayList<CalendarEvent> value = outputMap.get(date);
+					value.add(e);
+					outputMap.put(date, value);
+				}
+				else
+				{
+					ArrayList<CalendarEvent> value = new ArrayList<CalendarEvent>();
+					value.add(e);
+					outputMap.put(date, value);
+				}
+			}
+		}
 	}
 	
 	/***
