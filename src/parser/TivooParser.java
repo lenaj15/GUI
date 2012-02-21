@@ -39,6 +39,10 @@ abstract public class TivooParser {
 		myDocument = null;
 		loadFile();
 	}
+	
+	public TivooParser(Document doc){
+		myDocument = doc;
+	}
 
 	/***
 	 * Creates parsed XML document based upon filename
