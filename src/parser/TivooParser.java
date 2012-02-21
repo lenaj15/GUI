@@ -25,7 +25,7 @@ abstract public class TivooParser {
 	private String myFileName;
 	protected Document myDocument;
 	
-	private String[] myPaths;
+	protected String[] myPaths;
 	
 
 	/***
@@ -65,6 +65,7 @@ abstract public class TivooParser {
 	private ArrayList<List> parseXML(){
 		ArrayList<List> parsedInformation = new ArrayList<List>();
 		for(String temp: myPaths){
+			System.out.println(temp);
 			XPath currentPath;
             try {
 	            currentPath = XPath.newInstance(temp);

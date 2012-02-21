@@ -10,8 +10,8 @@ public class DukeCalParser extends TivooParser {
 	        "/events/event/end/utcdate" };
 
 	public DukeCalParser(String filename) throws JDOMException {
-
 		super(filename);
+		super.myPaths = this.myPaths;
 	}
 
 	@Override

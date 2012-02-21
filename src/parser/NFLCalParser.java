@@ -7,6 +7,8 @@ public class NFLCalParser extends TivooParser {
 
 	public NFLCalParser(String filename) throws JDOMException {
 		super(filename);
+		super.myPaths = this.myPaths;
+		
 	}
 
 	protected String[] myPaths = { "/document/row/Col1", "/document/row/Col15",

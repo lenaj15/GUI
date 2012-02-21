@@ -9,6 +9,8 @@ import org.jdom.JDOMException;
 import org.joda.time.DateTime;
 
 import parser.DukeCalParser;
+import parser.NFLCalParser;
+import parser.TivooParser;
 import event.CalendarEvent;
 import filter.FilterByDates;
 
@@ -17,12 +19,12 @@ public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
 		// this is the new parser
-		DukeCalParser calendarParser = new DukeCalParser("NFL.xml");
+		TivooParser calendarParser = new NFLCalParser("NFL.xml");
 		ArrayList<CalendarEvent> list = calendarParser.parseFile();
 
 		// testing filter
 		ArrayList<String> test = new ArrayList<String>();
-		test.add("Lemurs");
+		test.add("Giants");
 		
 //		FilterByKeywords f = new FilterByKeywords();
 //		ArrayList<CalendarEvent> results = f.filter(list, test);
