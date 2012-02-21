@@ -24,7 +24,8 @@ abstract public class TivooParser {
 
 	private String myFileName;
 	protected Document myDocument;
-	protected ArrayList<XPath> myPaths;
+	
+	private String[] myPaths;
 	
 
 	/***
@@ -37,7 +38,6 @@ abstract public class TivooParser {
 		myFileName = filename;
 		myDocument = null;
 		loadFile();
-		createPaths();
 	}
 
 	/***
@@ -58,30 +58,37 @@ abstract public class TivooParser {
 		}
 	}
 
-	public abstract void createPaths() throws JDOMException;
+	/***
+	 * Helper method to read all information from file first
+	 * @return
+	 */
+	private ArrayList<List> parseXML(){
+		ArrayList<List> parsedInformation = new ArrayList<List>();
+		for(String temp: myPaths){
+			XPath currentPath;
+            try {
+	            currentPath = XPath.newInstance(temp);
+	            List listToAdd = currentPath.selectNodes(myDocument);
+	            parsedInformation.add(listToAdd);
+            } catch (JDOMException e) {
+	            e.printStackTrace();
+            }
+		}
+		return parsedInformation;
+	}
 	
 	/***
 	 * Method responsible for parsing and returning an array list of events to
-	 * output
+	 * output in an ArrayList of Calendar Events
 	 * 
 	 * @return
 	 */
 	public ArrayList<CalendarEvent> parseFile() {
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
 		
-		ArrayList<List> readInformation = new ArrayList<List>();
+		ArrayList<List> readInformation = parseXML();
 		
-		int size=0;
-		
-		for(XPath temp: myPaths){
-			try {
-	            List listToAdd = temp.selectNodes(myDocument);
-	            readInformation.add(listToAdd);
-	            size=listToAdd.size();
-            } catch (JDOMException e) {
-	            e.printStackTrace();
-            }
-		}
+		int size=readInformation.get(0).size();
 		
 		for(int i=0; i<size; i++){
 			String title, description;
