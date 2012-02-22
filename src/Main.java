@@ -6,6 +6,8 @@ import html_generator.HtmlTableCalendar;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import model.TivooSystem;
+
 import org.jdom.JDOMException;
 import org.joda.time.DateTime;
 
@@ -17,29 +19,11 @@ import event.CalendarEvent;
 public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
-		// this is the new parser
-		TivooParserFactory factory = new TivooParserFactory("NFL.xml");
-		TivooParser parser = factory.createParser();
+		TivooSystem s = new TivooSystem();
+		s.loadFile("dukecal.xml");
+		//s.filterByKeyWords("Lemur");
+		s.generateCalendar();
 		
-		
-		ArrayList<CalendarEvent> results = parser.parseFile();
-
-		// html writing
-		String outputOption = "calendar";
-		
-		HtmlGenerator sortedlistCreator = new HtmlSortedList(results,
-				null, null);
-		HtmlGenerator conflictCreator = new HtmlConflictTable(results, 
-				null, null);
-		HtmlGenerator calendarCreator = new HtmlTableCalendar(results, 
-				new DateTime(2011, 11, 1, 0, 0), new DateTime(2011, 11, 30, 23, 0));
-		
-		if (outputOption.equals("sorted"))
-			sortedlistCreator.generateOutput();
-		else if (outputOption.equals("conflict"))
-			conflictCreator.generateOutput();
-		else if (outputOption.equals("calendar"))
-			calendarCreator.generateOutput();
 
 	}
 

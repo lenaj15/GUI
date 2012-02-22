@@ -68,7 +68,7 @@ public class TivooSystem {
 	 */
 	public void generateCalendar() throws IOException{
 		HtmlGenerator calendarCreator = new HtmlTableCalendar(myList, 
-				new DateTime(2011, 11, 1, 0, 0), new DateTime(2011, 11, 30, 23, 0));
+				new DateTime(2000, 11, 1, 0, 0), new DateTime(2012, 11, 30, 23, 0));
 		calendarCreator.generateOutput();
 	}
 	
