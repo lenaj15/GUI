@@ -13,6 +13,7 @@ public class DukeCalParser extends TivooParser {
 	
 	public DukeCalParser(Document doc) throws JDOMException {
 		super(doc);
+		super.myPaths = this.myPaths;
 	}
 
 	@Override

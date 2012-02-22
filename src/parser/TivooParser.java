@@ -28,18 +28,11 @@ abstract public class TivooParser {
 
 	protected String[] myPaths;
 
-	/***
-	 * Constructor with name of file to be parsed
-	 * 
-	 * @param filename
-	 * @throws JDOMException
-	 */
-	public TivooParser(String filename) throws JDOMException {
-		myFileName = filename;
-		myDocument = null;
-		loadFile();
-	}
 
+	/***
+	 * Constructor
+	 * @param doc
+	 */
 	public TivooParser(Document doc) {
 		myDocument = doc;
 	}
