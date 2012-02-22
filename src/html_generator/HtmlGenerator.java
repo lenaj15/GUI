@@ -42,7 +42,7 @@ public abstract class HtmlGenerator {
 		ArrayList<CalendarEvent> result = new ArrayList<CalendarEvent>();
 		for (CalendarEvent e: list)
 		{
-			if (e.isOutput)
+			if (e.getisOutput())
 				result.add(e);
 		}
 		return result;
