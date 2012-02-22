@@ -1,11 +1,12 @@
 import html_generator.HtmlGenerator;
-import html_generator.HtmlHorizontalCalendar;
-import html_generator.HtmlVerticalList;
+import html_generator.HtmlSortedList;
+import html_generator.HtmlTableCalendar;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.jdom.JDOMException;
+import org.joda.time.DateTime;
 
 import parser.NFLCalParser;
 import parser.TivooParser;
@@ -31,15 +32,22 @@ public class Main {
 //		 11, 0, 0), new DateTime(2012, 12, 1, 23, 0));
 
 		// html writing
-		String outputOption = "horizontal";
+		String outputOption = "calendar";
 		
-		HtmlGenerator calendarCreator = new HtmlHorizontalCalendar(results);
-		HtmlGenerator listCreator = new HtmlVerticalList(results);
+		HtmlGenerator sortedlistCreator = new HtmlSortedList(results,
+				null, null);
+		HtmlGenerator conflictCreator = new HtmlTableCalendar(results, 
+				null, null);
+		HtmlGenerator calendarCreator = new HtmlTableCalendar(results, 
+				new DateTime(2011, 11, 30, 0, 0), new DateTime(2011, 12, 1, 23, 0));
 		
-		if (outputOption.equals("horizontal"))
+		if (outputOption.equals("sorted"))
+			sortedlistCreator.generateOutput();
+		else if (outputOption.equals("conflict"))
+			conflictCreator.generateOutput();
+		else if (outputOption.equals("calendar"))
 			calendarCreator.generateOutput();
-		else if (outputOption.equals("vertical"))
-			listCreator.generateOutput();
+
 	}
 
 }

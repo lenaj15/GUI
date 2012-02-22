@@ -8,12 +8,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.joda.time.DateTime;
+
 import event.CalendarEvent;
 
 @SuppressWarnings("unchecked")
 public abstract class HtmlGenerator {
 	protected ArrayList<CalendarEvent> outputList;
 	protected Map<Object, ArrayList<CalendarEvent>> outputMap;
+	protected DateTime startDate;
+	protected DateTime endDate;
+	
 	protected final static String FILEPATH = "C:\\Users\\atm15\\Desktop\\";
 	protected final static String FOLDER = "subpages\\";
 	protected final static String FILENAME = "output";
@@ -29,8 +34,10 @@ public abstract class HtmlGenerator {
 	 * 
 	 * @param list
 	 */
-	public HtmlGenerator(ArrayList<CalendarEvent> list) {
+	public HtmlGenerator(ArrayList<CalendarEvent> list, DateTime start, DateTime end) {
 		outputList = trimList(list);
+		startDate = start;
+		endDate = end;
 	}
 	
 	/***
