@@ -1,7 +1,5 @@
 package parser;
 
-import event.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +9,10 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.joda.time.DateTime;
 import org.jdom.xpath.XPath;
+import org.joda.time.DateTime;
+
+import event.CalendarEvent;
 
 /**
  * Super class of all different parsers
@@ -20,13 +20,12 @@ import org.jdom.xpath.XPath;
  * @author bryanyang
  * 
  */
+@SuppressWarnings("rawtypes")
 abstract public class TivooParser {
 
 	private String myFileName;
 	protected Document myDocument;
-	
 	protected String[] myPaths;
-	
 
 	/***
 	 * Constructor with name of file to be parsed
@@ -62,10 +61,9 @@ abstract public class TivooParser {
 	 * Helper method to read all information from file first
 	 * @return
 	 */
-	private ArrayList<List> parseXML(){
+    private ArrayList<List> parseXML() {
 		ArrayList<List> parsedInformation = new ArrayList<List>();
 		for(String temp: myPaths){
-			System.out.println(temp);
 			XPath currentPath;
             try {
 	            currentPath = XPath.newInstance(temp);
@@ -91,7 +89,7 @@ abstract public class TivooParser {
 		
 		int size=readInformation.get(0).size();
 		
-		for(int i=0; i<size; i++){
+		for(int i=0; i<size; i++) {
 			String title, description;
 			DateTime start, end;
 			
@@ -108,7 +106,6 @@ abstract public class TivooParser {
 			list.add(new CalendarEvent(title, start, end, description));
 		}
 		
-	
 		return list;
     }
 	

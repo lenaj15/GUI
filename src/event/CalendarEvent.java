@@ -11,7 +11,7 @@ public class CalendarEvent {
 	public DateTime myStartTime, myEndTime;
 	public boolean isOutput;
 	
-	public CalendarEvent(String title, DateTime start, DateTime end, String summaries){	
+	public CalendarEvent(String title, DateTime start, DateTime end, String summaries) {	
 		myTitle = title;
 		myStartTime = start;
 		myEndTime = end;
