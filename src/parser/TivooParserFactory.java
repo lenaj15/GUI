@@ -16,7 +16,7 @@ public class TivooParserFactory {
 	}
 
 	public TivooParser createParser() throws JDOMException{
-		Document doc = loadFile();
+		Document doc = TivooParser.validateType(myFileName);
 		
 		String rootNode = doc.getRootElement().getValue();
 		
@@ -26,22 +26,4 @@ public class TivooParserFactory {
 		
 	}
 	
-	private Document loadFile() {
-		SAXBuilder builder = new SAXBuilder();
-		Document returnDocument;
-
-		File XmlFile = new File(myFileName);
-
-		try {
-			returnDocument = builder.build(XmlFile);
-			return returnDocument;
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 }
