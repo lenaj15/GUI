@@ -1,5 +1,6 @@
 package parser;
 
+import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.joda.time.DateTime;
 
@@ -9,9 +10,9 @@ public class DukeCalParser extends TivooParser {
 	        "/events/event/description", "/events/event/start/utcdate",
 	        "/events/event/end/utcdate" };
 
-	public DukeCalParser(String filename) throws JDOMException {
-		super(filename);
-		super.myPaths = this.myPaths;
+	
+	public DukeCalParser(Document doc) throws JDOMException {
+		super(doc);
 	}
 
 	@Override
