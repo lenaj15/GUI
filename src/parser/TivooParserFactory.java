@@ -18,9 +18,10 @@ public class TivooParserFactory {
 	public TivooParser createParser() throws JDOMException{
 		Document doc = TivooParser.validateType(myFileName);
 		
-		String rootNode = doc.getRootElement().getValue();
+		String rootNode = doc.getRootElement().getName();
 		
 		if(rootNode.equals("events")) return new DukeCalParser(doc);
+		if(rootNode.equals("document")) return new NFLCalParser(doc);
 		
 		return null;
 		

@@ -118,7 +118,7 @@ abstract public class TivooParser {
 	 * @param input
 	 * @return
 	 */
-	public abstract DateTime parseDate(String input);
+	protected abstract DateTime parseDate(String input);
 
 	/***
 	 * Used by parserfactory to check document type
