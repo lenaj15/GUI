@@ -21,7 +21,7 @@ public class Main {
 
 		TivooSystem s = new TivooSystem();
 		s.loadFile("dukecal.xml");
-		//s.filterByKeyWords("Lemur");
+		s.filterByKeyWords("Lemur");
 		s.generateCalendar();
 		
 
