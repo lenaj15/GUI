@@ -11,10 +11,10 @@ public class FilterByDates extends Filter {
 	public ArrayList<CalendarEvent> filter(ArrayList <CalendarEvent> list, DateTime start, DateTime end) {
 		
 		for (CalendarEvent e: list) {
-			if (e.myStartTime.getMillis() >= start.getMillis() && e.myEndTime.getMillis() <= end.getMillis())
-				e.isOutput &= true;
+			if (e.getmyStartTime().getMillis() >= start.getMillis() && e.getmyEndTime().getMillis() <= end.getMillis())
+				e.toggleIntersect();
 			else
-				e.isOutput = false;
+				e.setisOutput(false);
 		}
 		return list;
 	}
