@@ -11,9 +11,9 @@ public class FilterByKeywords extends Filter {
 		for (CalendarEvent e: list) {
 			for (String s : wordList) {
 				if (e.getMyTitle().contains(s))
-					e.isOutput &= true;
+					e.toggleIntersect();
 				else
-					e.isOutput = false;
+					e.setisOutput(false);
 			}
 		}
 		return list;
