@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
 		// this is the new parser
-		TivooParser calendarParser = new NFLCalParser("dukecal.xml");
+		TivooParser calendarParser = new NFLCalParser("NFL.xml");
 		ArrayList<CalendarEvent> list = calendarParser.parseFile();
 
 		// testing filter
@@ -33,14 +33,14 @@ public class Main {
 		ArrayList<CalendarEvent> results = list;
 
 		// html writing
-		String outputOption = "conflict";
+		String outputOption = "calendar";
 		
 		HtmlGenerator sortedlistCreator = new HtmlSortedList(results,
 				null, null);
 		HtmlGenerator conflictCreator = new HtmlConflictTable(results, 
 				null, null);
 		HtmlGenerator calendarCreator = new HtmlTableCalendar(results, 
-				new DateTime(2011, 11, 30, 0, 0), new DateTime(2011, 12, 1, 23, 0));
+				new DateTime(2011, 11, 1, 0, 0), new DateTime(2011, 11, 30, 23, 0));
 		
 		if (outputOption.equals("sorted"))
 			sortedlistCreator.generateOutput();

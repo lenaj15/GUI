@@ -15,9 +15,10 @@ import event.CalendarEvent;
 @SuppressWarnings("unchecked")
 public abstract class HtmlGenerator {
 	protected ArrayList<CalendarEvent> outputList;
-	protected Map<Object, ArrayList<CalendarEvent>> outputMap;
 	protected DateTime startDate;
 	protected DateTime endDate;
+	
+	protected Map<Object, ArrayList<CalendarEvent>> outputMap;
 	
 	protected final static String FILEPATH = "C:\\Users\\atm15\\Desktop\\";
 	protected final static String FOLDER = "subpages\\";
