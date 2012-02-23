@@ -19,19 +19,17 @@ public class HtmlSortedList extends HtmlGenerator {
 
 	public void generateOutput() throws IOException {
 		createSubFolder();
-		sortIntoMap();
 		
 		Tag html = generateHeader();
 		Tag body = new Tag("body");
 		
 		int fileIndex = 1;
 		
-		for (Object key: outputMap.keySet()) {
-			Tag h1 = generateKeyEntry(key);
-			for (CalendarEvent value: outputMap.get(key)) {
-				h1 = generateValueEntry(h1, value, fileIndex);
-				fileIndex++;
-			}
+		for (CalendarEvent item: outputList)
+		{
+			Tag h1 = new Tag("h1");
+			h1 = generateValueEntry(h1, item, fileIndex);
+			fileIndex++;
 			body.add(h1);
 		}
 		html.add(body);
@@ -39,24 +37,6 @@ public class HtmlSortedList extends HtmlGenerator {
 		printResult(html);
 	}
 
-	protected void sortIntoMap() {
-		outputMap = new TreeMap<Object, ArrayList<CalendarEvent>>();
-		
-		for (CalendarEvent e: outputList) {
-			String date = e.getMyDatesString();
-			if (outputMap.keySet().contains(date)) {
-				ArrayList<CalendarEvent> value = outputMap.get(date);
-				value.add(e);
-				outputMap.put(date, value);
-			}
-			else {
-				ArrayList<CalendarEvent> value = new ArrayList<CalendarEvent>();
-				value.add(e);
-				outputMap.put(date, value);
-			}
-		}
-	}
-	
 	protected Tag generateKeyEntry(Object key) {
 		Tag h1 = new Tag("h1");
 		h1.add(key.toString());
@@ -73,5 +53,4 @@ public class HtmlSortedList extends HtmlGenerator {
 		h1.add(h4);
 		return h1;
 	}
-
 }

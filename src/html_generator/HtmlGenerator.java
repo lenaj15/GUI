@@ -26,7 +26,6 @@ public abstract class HtmlGenerator {
 	protected final static String HTML_EXT = ".html";
 	
 	public abstract void generateOutput() throws IOException;
-	protected abstract void sortIntoMap();
 	protected abstract Tag generateKeyEntry(Object o);
 	protected abstract Tag generateValueEntry(Tag t, CalendarEvent e, int i) throws IOException;
 	
