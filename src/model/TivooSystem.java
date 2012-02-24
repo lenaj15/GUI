@@ -61,6 +61,33 @@ public class TivooSystem {
 		myList = filterer.filter(myList, list);
 	}
 
+	/****
+	 * Sorts by title (ascending order)
+	 * @param s
+	 */
+	public void sortByTitle(){
+		FilterByKeywords filterer = new FilterByKeywords();
+		filterer.sortByTitle(myList);
+	}
+	
+	/****
+	 * Sorts by start date
+	 * @param s
+	 */
+	public void sortByStartDate(){
+		FilterByKeywords filterer = new FilterByKeywords();
+		filterer.sortByStart(myList);
+	}
+	
+	
+	/****
+	 * Prints out list of CalendarEvents, debugging purposes
+	 */
+	public void printList() {
+		for (CalendarEvent e: myList) {
+			System.out.println(e.getMyTitle()+ " "+ e.getMyDatesString());
+		}
+	}
 	
 	/****
 	 * Generates calendar html output

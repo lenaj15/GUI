@@ -5,6 +5,7 @@ import html_generator.HtmlTableCalendar;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import model.TivooSystem;
 
@@ -22,6 +23,8 @@ public class Main {
 		TivooSystem s = new TivooSystem();
 		s.loadFile("dukecal.xml");
 		s.filterByKeyWords("Lemur");
+		s.sortByStartDate();
+		s.sortByTitle();
 		s.generateCalendar();
 		
 

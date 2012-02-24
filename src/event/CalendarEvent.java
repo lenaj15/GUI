@@ -1,5 +1,8 @@
 package event;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -41,7 +44,6 @@ public class CalendarEvent {
     	return myEndTime;
     }
 
-
 	public String getMySummaries() {
     	return mySummaries;
     }
@@ -57,34 +59,41 @@ public class CalendarEvent {
 		return "Title: " + myTitle + "\nDescription: " + mySummaries + "\nStarted: " + myStartTime + "\nEnded: " + myEndTime;
 	}
 
-   /* public static enum Order implements Comparator {
-     ByTitle() {
-       public int compare(CalendarEvent lhs, CalendarEvent rhs) {
-          return lhs.myTitle.compareTo(rhs.myTitle);
+    public enum sortType  {
+    ByTitle(new Comparator<CalendarEvent>() {
+        public int compare(CalendarEvent event1, CalendarEvent event2) {
+	        return event1.getMyTitle().compareTo(event2.getMyTitle());
+        }
+    }),
+    
+    ByStartTime(new Comparator<CalendarEvent>() {
+       public int compare(CalendarEvent event1, CalendarEvent event2) {
+          return event1.myStartTime.compareTo(event2.myStartTime);
        }
-    },
-    ByStartTime() {
-       public int compare(CalendarEvent lhs, CalendarEvent rhs) {
-          // TODO: Should really use a collator.
-          return lhs.myStartTime.compareTo(rhs.myStartTime);
-       },
+    }),
 
-    ByEndTime() {
-       public int compare(CalendarEvent lhs, CalendarEvent rhs) {
-          // TODO: Should really use a collator.
-          return lhs.myEndTime.compareTo(rhs.myEndTime);
+    ByEndTime(new Comparator<CalendarEvent>() {
+       public int compare(CalendarEvent event1, CalendarEvent event2) {
+          return event1.myEndTime.compareTo(event2.myEndTime);
        }
-    };
+    });
+    private Comparator <CalendarEvent> myComparator;
 
-    public abstract int compare(CalendarEvent lhs, CalendarEvent rhs);
-
-    public Comparator ascending() {
-       return this;
+    private sortType(Comparator<CalendarEvent> comparator){
+    	myComparator = comparator;
     }
-
-    public Comparator descending() {
-       return Collections.reverseOrder(this);
+    
+    public Comparator<CalendarEvent> ascending() {
+       return myComparator;
+    }
+    
+    public Comparator<CalendarEvent> descending() {
+       return Collections.reverseOrder(myComparator);
+    }
+    
+    public Comparator<CalendarEvent> getComparator(){
+    	return myComparator;
     }
  }
-	*/
+	
 }
