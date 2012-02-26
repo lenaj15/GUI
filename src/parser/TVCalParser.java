@@ -12,7 +12,7 @@ import event.CalendarEvent;
 
 public class TVCalParser extends TivooParser {
 
-	protected String[] myPaths = { "/tv/programme/title", "/tv/programme/desc"};
+	protected String[] myPaths = { "/tv/programme"};
 	
 	public TVCalParser(Document doc) throws JDOMException {
 		super(doc);
@@ -45,9 +45,10 @@ public class TVCalParser extends TivooParser {
 			Element titleElement = (Element) readInformation.get(0).get(i);
 			Element descriptionElement = (Element) readInformation.get(1)
 			        .get(i);
+			Element individualElement = (Element) readInformation.get(2).get(i);
 			
-			String startTimeString = titleElement.getAttributeValue("start");
-			String endTimeString = titleElement.getAttributeValue("stop");
+			String startTimeString = individualElement.getAttributeValue("start");
+			String endTimeString = individualElement.getAttributeValue("stop");
 
 			title = titleElement.getValue();
 			description = descriptionElement.getValue();

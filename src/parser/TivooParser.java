@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,9 +83,10 @@ abstract public class TivooParser {
 	 */
 	public static Document validateType(String filename) {
 		SAXBuilder builder = new SAXBuilder();
-		File XmlFile = new File(filename);
+		
 
 		try {
+			FileReader XmlFile = new FileReader(filename);
 			Document doc = builder.build(XmlFile);
 			return doc;
 		} catch (JDOMException e) {

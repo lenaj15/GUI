@@ -1,0 +1,49 @@
+<tv source-info-url="http://www.schedulesdirect.org/" source-info-name="Schedules Direct" generator-info-name="XMLTV/$Id: tv_grab_na_dd.in,v 1.82 2010/09/04 10:28:44 dekarl Exp $" generator-info-url="http://www.xmltv.org/">
+
+
+<programme start="20110928230000 -0400" stop="20110929000000 -0400" channel="I10093.labs.zap2it.com">
+    <title lang="en">The 700 Club</title>
+    <sub-title lang="en">Thank You, Partners!</sub-title>
+    <desc lang="en">The partners bless a couple beyond their grandest dreams.</desc>
+    <credits>
+      <presenter>Pat Robertson</presenter>
+      <presenter>Gordon Robertson</presenter>
+      <presenter>Terry Meeuwsen</presenter>
+    </credits>
+    <date>20100922</date>
+    <category lang="en">Talk</category>
+    <category lang="en">Religious</category>
+    <category lang="en">Series</category>
+    <episode-num system="dd_progid">EP00004175.4695</episode-num>
+    <episode-num system="onscreen">092210</episode-num>
+    <previously-shown start="20100922000000" />
+    <subtitles type="teletext" />
+    <rating system="VCHIP">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20110929000000 -0400" stop="20110929003000 -0400" channel="I10093.labs.zap2it.com">
+    <title lang="en">Whose Line Is It Anyway?</title>
+    <credits>
+      <actor>Ryan Stiles</actor>
+      <actor>Colin Mochrie</actor>
+      <actor>Wayne Brady</actor>
+      <presenter>Drew Carey</presenter>
+    </credits>
+    <date>20050418</date>
+    <category lang="en">Comedy</category>
+    <category lang="en">Game show</category>
+    <category lang="en">Series</category>
+    <episode-num system="dd_progid">EP00273673.0222</episode-num>
+    <episode-num system="onscreen">720</episode-num>
+    <audio>
+      <stereo>stereo</stereo>
+    </audio>
+    <previously-shown start="20050418000000" />
+    <subtitles type="teletext" />
+    <rating system="VCHIP">
+      <value>TV-PG</value>
+    </rating>
+  </programme>
+
+</tv>
