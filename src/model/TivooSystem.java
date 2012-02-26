@@ -1,7 +1,6 @@
 package model;
 
-import html_generator.HtmlGenerator;
-import html_generator.HtmlTableCalendar;
+import html_generator.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +8,10 @@ import java.util.ArrayList;
 import org.jdom.JDOMException;
 import org.joda.time.DateTime;
 
+import parser.TivooParser;
+import parser.TivooParserFactory;
 import event.CalendarEvent;
-import parser.*;
-import filter.*;
+import filter.FilterByKeywords;
 
 /***
  * Model for tivoo
@@ -47,7 +47,7 @@ public class TivooSystem {
 	 */
 	public void filterByKeywords(ArrayList<String> query){
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, query, true);
+		myList = filterer.filter(myList, query);
 	}
 	
 	/****
@@ -58,7 +58,7 @@ public class TivooSystem {
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(s);
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, list, false);
+		myList = filterer.filter(myList, list);
 	}
 
 	/****
@@ -97,6 +97,26 @@ public class TivooSystem {
 		HtmlGenerator calendarCreator = new HtmlTableCalendar(myList, 
 				new DateTime(2000, 11, 1, 0, 0), new DateTime(2012, 11, 30, 23, 0));
 		calendarCreator.generateOutput();
+	}
+	
+	/****
+	 * Generates calendar html output
+	 * @throws IOException
+	 */
+	public void generateConflictTable() throws IOException{
+		HtmlGenerator conflictCreator = new HtmlConflictTable(myList, 
+				null, null);
+		conflictCreator.generateOutput();
+	}
+	
+	/****
+	 * Generates calendar html output
+	 * @throws IOException
+	 */
+	public void generateSortedList() throws IOException{
+		HtmlGenerator sortedListCreator = new HtmlSortedList(myList, 
+				null, null);
+		sortedListCreator.generateOutput();
 	}
 	
 
