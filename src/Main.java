@@ -21,11 +21,8 @@ public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
 		TivooSystem s = new TivooSystem();
-		s.loadFile("dukecal.xml");
-		s.filterByKeyWords("Lemur");
-		s.sortByStartDate();
-		s.sortByTitle();
-		s.generateCalendar();
+		s.loadFile("tv.xml");
+		System.out.println("files loaded");
 		
 
 	}

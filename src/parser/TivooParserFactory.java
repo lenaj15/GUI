@@ -22,6 +22,10 @@ public class TivooParserFactory {
 		
 		if(rootNode.equals("events")) return new DukeCalParser(doc);
 		if(rootNode.equals("document")) return new NFLCalParser(doc);
+		if(rootNode.equals("feed")) return new GoogleCalParser(doc);
+		if(rootNode.equals("dataroot")) return new DukeBasketballCalParser(doc);
+		if(rootNode.equals("tv")) return new TVCalParser(doc);
+		
 		
 		return null;
 		
