@@ -14,6 +14,13 @@ public abstract class Filter {
 			return lists;
 		}
 		
+		public void toggle (CalendarEvent e, boolean include, boolean condition){
+			if ((condition && include) || !(condition || include))
+				e.toggleIntersect();
+			else
+				e.setisOutput(false);
+		}
+		
 		public void sortByStart(ArrayList <CalendarEvent> lists) {
 			 Collections.sort(lists, CalendarEvent.sortType.ByStartTime.ascending()); 
 		}

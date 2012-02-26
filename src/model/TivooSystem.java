@@ -47,7 +47,7 @@ public class TivooSystem {
 	 */
 	public void filterByKeywords(ArrayList<String> query){
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, query);
+		myList = filterer.filter(myList, query, true);
 	}
 	
 	/****
@@ -58,7 +58,7 @@ public class TivooSystem {
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(s);
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, list);
+		myList = filterer.filter(myList, list, true);
 	}
 
 	/****

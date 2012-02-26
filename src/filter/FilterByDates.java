@@ -13,10 +13,8 @@ public class FilterByDates extends Filter {
 		for (CalendarEvent e: list) {
 			
 			boolean condition = (e.getmyStartTime().getMillis() >= start.getMillis() && e.getmyEndTime().getMillis()<= end.getMillis());
-			if ((condition && include) || !(condition || include))
-				e.toggleIntersect();
-			else
-				e.setisOutput(false);
+			super.toggle(e, include, condition);
+			
 		}
 		return list;
 	}
