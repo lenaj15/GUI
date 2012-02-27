@@ -21,7 +21,8 @@ public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
 		TivooSystem s = new TivooSystem();
-		s.loadFile("tvtest.xml");
+		s.loadFile("DukeBasketBall.xml");
+		int x  = 3;
 
 	}
 
