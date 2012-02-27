@@ -12,16 +12,12 @@ import model.TivooSystem;
 import org.jdom.JDOMException;
 import org.joda.time.DateTime;
 
-import parser.NFLCalParser;
-import parser.TivooParser;
-import parser.TivooParserFactory;
-import event.CalendarEvent;
 
 public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
 		TivooSystem s = new TivooSystem();
-		s.loadFile("DukeBasketBall.xml");
+		s.loadFile("googletest.xml");
 		int x  = 3;
 
 	}
