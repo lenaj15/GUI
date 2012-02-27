@@ -22,8 +22,6 @@ public class Main {
 
 		TivooSystem s = new TivooSystem();
 		s.loadFile("tvtest.xml");
-		System.out.println("files loaded");
-		
 
 	}
 
