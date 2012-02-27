@@ -37,7 +37,7 @@ public class TivooSystem {
 	public void loadFile(String filename) throws JDOMException{
 		TivooParserFactory factory = new TivooParserFactory(filename);
 		TivooParser parser = factory.createParser();
-		ArrayList<CalendarEvent> results = parser.parseFile();
+		ArrayList<CalendarEvent> results = parser.parseEvent();
 		myList.addAll(results);
 	}
 	

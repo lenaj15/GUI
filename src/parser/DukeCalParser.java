@@ -12,14 +12,13 @@ import event.CalendarEvent;
 
 public class DukeCalParser extends TivooParser {
 
-	protected String[] myPaths = { "/events/event/summary",
-	        "/events/event/description", "/events/event/start/utcdate",
-	        "/events/event/end/utcdate" };
+	protected String myPaths = "/events/event";
+	protected String myAttributePaths = "";
 
-	
 	public DukeCalParser(Document doc) throws JDOMException {
 		super(doc);
-		super.myPaths = this.myPaths;
+		super.myPath = this.myPaths;
+		super.myAttributePaths = this.myAttributePaths;
 	}
 
 	@Override
@@ -32,33 +31,29 @@ public class DukeCalParser extends TivooParser {
 		return new DateTime(input);
 	}
 
-	
-	public ArrayList<CalendarEvent> parseFile() {
+	public ArrayList<CalendarEvent> parseEvent() {
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
-
-		ArrayList<List> readInformation = super.parseXML();
-
-		int size = readInformation.get(0).size();
-
+		List readInformation = super.parseXML();
+		int size = readInformation.size();
 		for (int i = 0; i < size; i++) {
-
 			String title, description;
 			DateTime start, end;
-
-			Element titleElement = (Element) readInformation.get(0).get(i);
-			Element descriptionElement = (Element) readInformation.get(1)
-			        .get(i);
-			Element startTimeElement = (Element) readInformation.get(2).get(i);
-			Element endTimeElement = (Element) readInformation.get(3).get(i);
-
-			title = titleElement.getValue();
-			description = descriptionElement.getValue();
-			start = parseDate(startTimeElement.getValue());
-			end = parseDate(endTimeElement.getValue());
-
+			Element individualElement = (Element) readInformation.get(i);
+			title = individualElement.getChildText("summary");
+			description = individualElement.getChildText("description");
+			start = parseDate(individualElement.getChild("start").getChildText(
+			        "utcdate"));
+			end = parseDate(individualElement.getChild("end").getChildText(
+			        "utcdate"));
 			list.add(new CalendarEvent(title, start, end, description));
 		}
 
 		return list;
+	}
+
+	@Override
+	protected void parseAdditionalAttributes() {
+		// no additional attributes required for this parser
+
 	}
 }

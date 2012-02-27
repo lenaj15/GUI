@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 import event.CalendarEvent;
 
 /**
- * Super class of all different parsers. 
+ * Super class of all different parsers.
  * 
  * @author bryanyang
  * 
@@ -27,7 +27,11 @@ abstract public class TivooParser {
 	private String myFileName;
 	protected Document myDocument;
 
-	protected String[] myPaths;
+	// path of individual elements
+	protected String myPath;
+	
+	//patth of attributes from individual elements
+	protected String myAttributePaths;
 
 	/***
 	 * Constructor
@@ -43,37 +47,38 @@ abstract public class TivooParser {
 	 * 
 	 * @return
 	 */
-	public ArrayList<List> parseXML() {
-		ArrayList<List> parsedInformation = new ArrayList<List>();
-		for (String temp : myPaths) {
-			XPath currentPath;
-			try {
-				currentPath = XPath.newInstance(temp);
-				List listToAdd = currentPath.selectNodes(myDocument);
-				parsedInformation.add(listToAdd);
-			} catch (JDOMException e) {
-				e.printStackTrace();
-			}
+	public List parseXML() {
+		try {
+			XPath currentPath = XPath.newInstance(myPath);
+			List listToAdd = currentPath.selectNodes(myDocument);
+			return listToAdd;
+		} catch (JDOMException e) {
+			e.printStackTrace();
 		}
-		return parsedInformation;
+		return null;
 	}
 
 	/***
 	 * Method responsible for parsing and returning an array list of events to
-	 * output in an ArrayList of Calendar Events. Loops through all event elements
-	 * and grab specific fields needed
+	 * output in an ArrayList of Calendar Events. Loops through all event
+	 * elements and grab specific fields needed
 	 * 
 	 * @return
 	 */
-	public abstract ArrayList<CalendarEvent> parseFile();
+	public abstract ArrayList<CalendarEvent> parseEvent();
 
 	/***
-	 * Class responsible for parsing date and return DateTime object
+	 * Method responsible for parsing date and return DateTime object
 	 * 
 	 * @param input
 	 * @return
 	 */
 	protected abstract DateTime parseDate(String input);
+	
+	/***
+	 * Called by parseEvent to finalize event's attributes
+	 */
+	protected abstract void parseAdditionalAttributes();
 
 	/***
 	 * Used by parserfactory to check document type
@@ -82,9 +87,8 @@ abstract public class TivooParser {
 	 * @return
 	 */
 	public static Document validateType(String filename) {
-		SAXBuilder builder = new SAXBuilder();
-
 		try {
+			SAXBuilder builder = new SAXBuilder();
 			FileReader XmlFile = new FileReader(filename);
 			Document doc = builder.build(XmlFile);
 			return doc;
