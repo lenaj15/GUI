@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 import event.CalendarEvent;
 
 /**
- * Super class of all different parsers
+ * Super class of all different parsers. 
  * 
  * @author bryanyang
  * 
@@ -29,15 +29,14 @@ abstract public class TivooParser {
 
 	protected String[] myPaths;
 
-
 	/***
 	 * Constructor
+	 * 
 	 * @param doc
 	 */
 	public TivooParser(Document doc) {
 		myDocument = doc;
 	}
-
 
 	/***
 	 * Helper method to read all information from file first
@@ -61,7 +60,8 @@ abstract public class TivooParser {
 
 	/***
 	 * Method responsible for parsing and returning an array list of events to
-	 * output in an ArrayList of Calendar Events
+	 * output in an ArrayList of Calendar Events. Loops through all event elements
+	 * and grab specific fields needed
 	 * 
 	 * @return
 	 */
@@ -83,7 +83,6 @@ abstract public class TivooParser {
 	 */
 	public static Document validateType(String filename) {
 		SAXBuilder builder = new SAXBuilder();
-		
 
 		try {
 			FileReader XmlFile = new FileReader(filename);
