@@ -34,8 +34,7 @@ public class DukeCalParser extends TivooParser {
 	public ArrayList<CalendarEvent> parseEvent() {
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
 		List readInformation = super.parseXML();
-		int size = readInformation.size();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < readInformation.size(); i++) {
 			String title, description;
 			DateTime start, end;
 			Element individualElement = (Element) readInformation.get(i);

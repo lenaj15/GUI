@@ -1,5 +1,6 @@
 package event;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class CalendarEvent {
 	protected String myTitle, mySummaries;
 	protected DateTime myStartTime, myEndTime;
 	protected boolean isOutput;
-	protected HashMap<String, String> myAttributes;
+	protected HashMap<String, ArrayList<String>> myAttributes;
 
 	public CalendarEvent(String title, DateTime start, DateTime end, String summaries) {	
 		myTitle = title;
@@ -22,15 +23,25 @@ public class CalendarEvent {
 		myEndTime = end;
 		mySummaries = summaries;	
 		isOutput = true;
-		myAttributes = new HashMap<String, String>();
+		myAttributes = new HashMap<String, ArrayList<String>>();
 	}
 	
 	public void addAttribute(String attribute, String value){
-		myAttributes.put(attribute, value);
+		if(myAttributes.keySet().contains(attribute)){
+			myAttributes.get(attribute).add(value);
+		}else{
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(value);
+			myAttributes.put(attribute, temp);
+		}
 	}
 	
-	public HashMap<String, String> getAttributeMap(){
+	public HashMap<String, ArrayList<String>> getAttributeMap(){
 		return myAttributes;
+	}
+	
+	public ArrayList<String> getAttributeValue(String s){
+		return myAttributes.get(s);
 	}
 
 	public void setisOutput(boolean value) {

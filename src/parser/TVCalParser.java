@@ -12,11 +12,13 @@ import event.CalendarEvent;
 
 public class TVCalParser extends TivooParser {
 
-	protected String[] myPaths = { "/tv/programme" };
+	protected String myPath = "/tv/programme";
+	protected String[] myAttributePaths = { "./credits/actor" };
 
 	public TVCalParser(Document doc) throws JDOMException {
 		super(doc);
-		super.myPaths = this.myPaths;
+		super.myPath = this.myPath;
+		super.myAttributePaths = this.myAttributePaths;
 
 	}
 
@@ -30,19 +32,14 @@ public class TVCalParser extends TivooParser {
 	}
 
 	@Override
-	public ArrayList<CalendarEvent> parseFile() {
+	public ArrayList<CalendarEvent> parseEvent() {
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
-
-		ArrayList<List> readInformation = super.parseXML();
-
-		int size = readInformation.get(0).size();
-
-		for (int i = 0; i < size; i++) {
-
+		List readInformation = super.parseXML();
+		for (int i = 0; i < readInformation.size(); i++) {
 			String title, description;
 			DateTime start, end;
 
-			Element individualElement = (Element) readInformation.get(0).get(i);
+			Element individualElement = (Element) readInformation.get(i);
 
 			String startTimeString = individualElement
 			        .getAttributeValue("start");
@@ -60,22 +57,16 @@ public class TVCalParser extends TivooParser {
 			CalendarEvent thisEvent = new CalendarEvent(title, start, end,
 			        description);
 
-			addAttributesToEvents(thisEvent, individualElement);
+			try {
+				parseAdditionalAttributes(thisEvent, individualElement);
+			} catch (JDOMException e) {
+				e.printStackTrace();
+			}
 
 			list.add(thisEvent);
 		}
 
 		return list;
-	}
-
-	private void addAttributesToEvents(CalendarEvent thisEvent,
-	        Element thisElement) {
-		Element credits = thisElement.getChild("credits");
-		List names = credits.getChildren("actor");
-		for (int i = 0; i < names.size(); i++) {
-			Element temp = (Element) names.get(i);
-			thisEvent.addAttribute("actor", temp.getValue());
-		}
 	}
 
 }
