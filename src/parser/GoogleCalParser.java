@@ -13,12 +13,14 @@ import event.CalendarEvent;
 
 public class GoogleCalParser extends TivooParser {
 
-	protected String[] myPaths = {"/feed/entry"};
+	protected String myPath = "/feed/entry";
+	protected String[] myAttributePaths = {"./title"};
 
 	
 	public GoogleCalParser(Document doc) throws JDOMException {
 		super(doc);
-		super.myPaths = this.myPaths;
+		super.myPath = this.myPath;
+		super.myAttributePaths = this.myAttributePaths;
 		
 	}
 
@@ -29,16 +31,12 @@ public class GoogleCalParser extends TivooParser {
 	}
 
 	@Override
-    public ArrayList<CalendarEvent> parseFile() {
+    public ArrayList<CalendarEvent> parseEvent() {
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
-
-		ArrayList<List> readInformation = super.parseXML();
-
+		List readInformation = super.parseXML();
 		
-		int size = readInformation.get(0).size();
-		
-		for(int i = 0; i<size; i++){
-			Element individualElement = (Element) readInformation.get(0).get(i);
+		for(int i = 0; i<readInformation.size(); i++){
+			Element individualElement = (Element) readInformation.get(i);
 
 			String title, description;
 			DateTime start, end;
@@ -48,8 +46,6 @@ public class GoogleCalParser extends TivooParser {
 
 			start = parseDate(individualElement.getChildText("published"));
 			end = parseDate(individualElement.getChildText("updated"));
-			
-			
 			
 			list.add(new CalendarEvent(title, start, end, description));
 		}

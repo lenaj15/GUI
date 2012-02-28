@@ -17,10 +17,9 @@ public class Main {
 	public static void main(String[] args) throws IOException, JDOMException {
 
 		TivooSystem s = new TivooSystem();
-		s.loadFile("NFL.xml");
+		s.loadFile("googletest.xml");
 		s.filterByKeyWords("Brady");
 		
-		int x  = 3;
 
 	}
 
