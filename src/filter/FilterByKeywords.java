@@ -15,12 +15,20 @@ public class FilterByKeywords extends Filter {
 
 				boolean title = e.getMyTitle().contains(s);
 				boolean summaries = e.getMySummaries().contains(s);
-				boolean condition = e.getAttributeMap().containsValue(s);
-				
+	
 				super.toggle(e, include, title);
 				super.toggle(e, include, summaries);
-				super.toggle(e, include, condition);
 					
+				for (String attribute : e.getAttributeMap().keySet()){
+					for (String entry : e.getAttributeMap().get(attribute)) {
+						boolean condition = entry.contains(s);
+						super.toggle(e, include, condition);
+						if (e.getisOutput())
+							break;
+					}
+					if (e.getisOutput())
+						break;
+				}
 			}
 		}
 		return list;
@@ -35,12 +43,18 @@ public class FilterByKeywords extends Filter {
 	public ArrayList<CalendarEvent> filter(ArrayList<CalendarEvent> list, ArrayList<String> wordList, boolean include, String attribute) {
 
 		for (CalendarEvent e : list) {
+
 			if (e.getAttributeMap().containsKey(attribute)){
 				for (String s : wordList) {
+
 					for (String entry : e.getAttributeMap().get(attribute)) {
 						boolean condition = entry.contains(s);
 						super.toggle(e, include, condition);
+						if (e.getisOutput())
+							break;
 					}
+					if (e.getisOutput())
+						break;
 				}
 			}
 		}
