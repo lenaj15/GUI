@@ -13,7 +13,7 @@ import event.CalendarEvent;
 public class DukeCalParser extends TivooParser {
 
 	protected String myPaths = "/events/event";
-	protected String myAttributePaths = "";
+	protected String[] myAttributePaths = {"./start/utcdate"};
 
 	public DukeCalParser(Document doc) throws JDOMException {
 		super(doc);
@@ -45,15 +45,17 @@ public class DukeCalParser extends TivooParser {
 			        "utcdate"));
 			end = parseDate(individualElement.getChild("end").getChildText(
 			        "utcdate"));
-			list.add(new CalendarEvent(title, start, end, description));
+			CalendarEvent event = new CalendarEvent(title, start, end, description);
+			try {
+	            parseAdditionalAttributes(event, individualElement);
+            } catch (JDOMException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+            }
+			list.add(event);
 		}
 
 		return list;
 	}
 
-	@Override
-	protected void parseAdditionalAttributes() {
-		// no additional attributes required for this parser
-
-	}
 }

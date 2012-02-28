@@ -29,9 +29,9 @@ abstract public class TivooParser {
 
 	// path of individual elements
 	protected String myPath;
-	
-	//patth of attributes from individual elements
-	protected String myAttributePaths;
+
+	// patth of attributes from individual elements
+	protected String[] myAttributePaths;
 
 	/***
 	 * Constructor
@@ -74,11 +74,23 @@ abstract public class TivooParser {
 	 * @return
 	 */
 	protected abstract DateTime parseDate(String input);
-	
+
 	/***
 	 * Called by parseEvent to finalize event's attributes
+	 * 
+	 * @throws JDOMException
 	 */
-	protected abstract void parseAdditionalAttributes();
+	protected void parseAdditionalAttributes(CalendarEvent event,
+	        Element current) throws JDOMException {
+		for (String temp : myAttributePaths) {
+			XPath newpath = XPath.newInstance(temp);
+			List list = newpath.selectNodes(current);
+			for(int i = 0 ; i<list.size(); i++){
+				Element e = (Element) list.get(i);
+				event.addAttribute(temp.substring(temp.lastIndexOf("/")+1), e.getValue());
+			}
+		}
+	}
 
 	/***
 	 * Used by parserfactory to check document type
