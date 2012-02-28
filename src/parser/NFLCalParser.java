@@ -12,12 +12,13 @@ import event.CalendarEvent;
 
 public class NFLCalParser extends TivooParser {
 
-	protected String[] myPaths = { "/document/row/Col1", "/document/row/Col15",
-	        "/document/row/Col8", "/document/row/Col9" };
+	protected String myPath = "/document/row";
+	protected String[] myAttributePaths = {"./Col2"};
 	
 	public NFLCalParser(Document doc) throws JDOMException {
 		super(doc);
-		super.myPaths = this.myPaths;
+		super.myPath = this.myPath;
+		super.myAttributePaths = this.myAttributePaths;
 		
 	}
 
@@ -27,33 +28,36 @@ public class NFLCalParser extends TivooParser {
 		return new DateTime(input);
 	}
 	
-	public ArrayList<CalendarEvent> parseFile() {
+	public ArrayList<CalendarEvent> parseEvent() {
 		ArrayList<CalendarEvent> list = new ArrayList<CalendarEvent>();
 
-		ArrayList<List> readInformation = super.parseXML();
+		List readInformation = super.parseXML();
 
-		int size = readInformation.get(0).size();
-
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < readInformation.size(); i++) {
 
 			String title, description;
 			DateTime start, end;
+			Element individualElement = (Element) readInformation.get(i);
 
-			Element titleElement = (Element) readInformation.get(0).get(i);
-			Element descriptionElement = (Element) readInformation.get(1)
-			        .get(i);
-			Element startTimeElement = (Element) readInformation.get(2).get(i);
-			Element endTimeElement = (Element) readInformation.get(3).get(i);
+			title = individualElement.getChildText("Col1");
+			description = individualElement.getChildText("Col15");
+			start = parseDate(individualElement.getChildText("Col8"));
+			end = parseDate(individualElement.getChildText("Col9"));
+			
+			CalendarEvent e = new CalendarEvent(title, start, end, description);
+			
+			try {
+	            parseAdditionalAttributes(e, individualElement);
+            } catch (JDOMException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+            }
 
-			title = titleElement.getValue();
-			description = descriptionElement.getValue();
-			start = parseDate(startTimeElement.getValue());
-			end = parseDate(endTimeElement.getValue());
-
-			list.add(new CalendarEvent(title, start, end, description));
+			list.add(e);
 		}
 
 		return list;
 	}
+
 
 }
