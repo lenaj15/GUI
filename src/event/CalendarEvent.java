@@ -74,6 +74,10 @@ public class CalendarEvent {
 	public void toggleIntersect() {
 		isOutput &= true;
 	}
+	
+	public void reverse() {
+		isOutput = !isOutput;
+	}
 
 	public String getMyTitle() {
 		return myTitle;

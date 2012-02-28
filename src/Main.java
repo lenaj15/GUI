@@ -18,6 +18,8 @@ public class Main {
 
 		TivooSystem s = new TivooSystem();
 		s.loadFile("tvtest.xml");
+		s.filterByKeyWords("Line");
+		
 		int x  = 3;
 
 	}

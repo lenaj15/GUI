@@ -15,10 +15,12 @@ public abstract class Filter {
 		}
 		
 		public void toggle (CalendarEvent e, boolean include, boolean condition){
-			if ((condition && include) || !(condition || include))
+			if (condition)
 				e.toggleIntersect();
 			else
 				e.setisOutput(false);
+			if (!include)
+				e.reverse();
 		}
 		
 		public void sortByStart(ArrayList <CalendarEvent> lists) {

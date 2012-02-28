@@ -37,9 +37,10 @@ public class FilterByKeywords extends Filter {
 		for (CalendarEvent e : list) {
 			if (e.getAttributeMap().containsKey(attribute)){
 				for (String s : wordList) {
-					String entry = e.getAttributeMap().get(attribute);
-					boolean condition = entry.contains(s);
-					super.toggle(e, include, condition);
+					for (String entry : e.getAttributeMap().get(attribute)) {
+						boolean condition = entry.contains(s);
+						super.toggle(e, include, condition);
+					}
 				}
 			}
 		}

@@ -59,8 +59,22 @@ public class TivooSystem {
 		list.add(s);
 		FilterByKeywords filterer = new FilterByKeywords();
 		myList = filterer.filter(myList, list, true);
+		printList();
 	}
 
+	/****
+	 * Filters by single keywords
+	 * @param s
+	 */
+	public void filterByKeyWords(String s, String attribute){
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(s);
+		FilterByKeywords filterer = new FilterByKeywords();
+		myList = filterer.filter(myList, list, true, attribute);
+		printList();
+	}
+
+	
 	/****
 	 * Sorts by title (ascending order)
 	 * @param s
@@ -85,7 +99,8 @@ public class TivooSystem {
 	 */
 	public void printList() {
 		for (CalendarEvent e: myList) {
-			System.out.println(e.getMyTitle()+ " "+ e.getMyDatesString());
+			if (e.getisOutput())
+				System.out.println(e.getMyTitle()+ " "+ e.getMyDatesString());
 		}
 	}
 	
