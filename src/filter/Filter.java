@@ -14,7 +14,7 @@ public abstract class Filter {
 			return lists;
 		}
 		
-		public void toggle (CalendarEvent e, boolean include, boolean condition){
+		protected void toggle (CalendarEvent e, boolean include, boolean condition){
 			if (condition)
 				e.toggleIntersect();
 			else
