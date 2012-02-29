@@ -2,6 +2,7 @@ package model;
 
 import html_generator.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -36,6 +37,13 @@ public class TivooSystem {
 	 */
 	public void loadFile(String filename) throws JDOMException{
 		TivooParserFactory factory = new TivooParserFactory(filename);
+		TivooParser parser = factory.createParser();
+		ArrayList<CalendarEvent> results = parser.parseEvent();
+		myList.addAll(results);
+	}
+	
+	public void loadFile(File file) throws JDOMException{
+		TivooParserFactory factory = new TivooParserFactory(file.getName());
 		TivooParser parser = factory.createParser();
 		ArrayList<CalendarEvent> results = parser.parseEvent();
 		myList.addAll(results);
