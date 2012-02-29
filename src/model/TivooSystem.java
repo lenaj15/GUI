@@ -13,6 +13,7 @@ import parser.TivooParser;
 import parser.TivooParserFactory;
 import event.CalendarEvent;
 import filter.FilterByKeywords;
+import filter.Sorter;
 
 /***
  * Model for tivoo
@@ -71,7 +72,7 @@ public class TivooSystem {
 	}
 
 	/****
-	 * Filters by single keywords
+	 * Filters by single keywords in a specific attribute
 	 * @param s
 	 */
 	public void filterByKeyWords(String s, String attribute){
@@ -88,8 +89,7 @@ public class TivooSystem {
 	 * @param s
 	 */
 	public void sortByTitle(){
-		FilterByKeywords filterer = new FilterByKeywords();
-		filterer.sortByTitle(myList);
+		Sorter.sortByTitle(myList);
 	}
 	
 	/****
@@ -97,8 +97,7 @@ public class TivooSystem {
 	 * @param s
 	 */
 	public void sortByStartDate(){
-		FilterByKeywords filterer = new FilterByKeywords();
-		filterer.sortByStart(myList);
+		Sorter.sortByStart(myList);
 	}
 	
 	

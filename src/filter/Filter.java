@@ -22,28 +22,4 @@ public abstract class Filter {
 			if (!include)
 				e.reverse();
 		}
-		
-		public void sortByStart(ArrayList <CalendarEvent> lists) {
-			 Collections.sort(lists, CalendarEvent.sortType.ByStartTime.ascending()); 
-		}
-		
-		public void sortByStartDescend(ArrayList <CalendarEvent> lists) {
-			 Collections.sort(lists, CalendarEvent.sortType.ByStartTime.descending()); 
-		}
-		
-		public void sortByTitle(ArrayList <CalendarEvent> lists) {
-			Collections.sort(lists, CalendarEvent.sortType.ByTitle.ascending());
-		}
-		
-		public void sortByEnd(ArrayList <CalendarEvent> lists) {
-			Collections.sort(lists, CalendarEvent.sortType.ByEndTime.ascending()); 
-		}
-		
-		public void sortByTitleDescend(ArrayList <CalendarEvent> lists) {
-			Collections.sort(lists, CalendarEvent.sortType.ByTitle.descending());
-		}
-		
-		public void sortByEndDescend(ArrayList <CalendarEvent> lists) {
-			Collections.sort(lists, CalendarEvent.sortType.ByEndTime.descending()); 
-		}
 }
