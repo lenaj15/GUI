@@ -10,6 +10,10 @@ import org.joda.time.DateTime;
 
 import event.CalendarEvent;
 
+/***
+ * Purpose: creates a vertical list showing groups of conflicting events
+ * 
+ */
 @SuppressWarnings("unchecked")
 public class HtmlConflictTable extends HtmlGenerator {
 

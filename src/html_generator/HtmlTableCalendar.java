@@ -10,6 +10,10 @@ import org.joda.time.DateTime;
 
 import event.CalendarEvent;
 
+/***
+ * Purpose: creates a table with dates in the first column and events in the others
+ * 
+ */
 @SuppressWarnings("unchecked")
 public class HtmlTableCalendar extends HtmlGenerator {
 

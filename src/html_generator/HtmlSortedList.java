@@ -4,12 +4,15 @@ import html.Tag;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 import org.joda.time.DateTime;
 
 import event.CalendarEvent;
 
+/***
+ * Purpose: creates vertically sorted list with each event on a new line
+ * 
+ */
 @SuppressWarnings("unchecked")
 public class HtmlSortedList extends HtmlGenerator {
 

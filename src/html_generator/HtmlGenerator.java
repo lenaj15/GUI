@@ -20,10 +20,10 @@ public abstract class HtmlGenerator {
 	
 	protected Map<Object, ArrayList<CalendarEvent>> outputMap;
 	
-	protected final static String FILEPATH = "C:\\Users\\atm15\\Desktop\\";
-	protected final static String FOLDER = "subpages\\";
-	protected final static String FILENAME = "output";
-	protected final static String HTML_EXT = ".html";
+	public final static String FILEPATH = "C:\\Users\\atm15\\Desktop\\";
+	public final static String FOLDER = "subpages\\";
+	public final static String FILENAME = "output";
+	public final static String HTML_EXT = ".html";
 	
 	public abstract void generateOutput() throws IOException;
 	protected abstract Tag generateKeyEntry(Object o);
@@ -45,7 +45,7 @@ public abstract class HtmlGenerator {
 	 * 
 	 * @param list
 	 */
-	public ArrayList<CalendarEvent> trimList(ArrayList<CalendarEvent> list) {
+	private ArrayList<CalendarEvent> trimList(ArrayList<CalendarEvent> list) {
 		ArrayList<CalendarEvent> result = new ArrayList<CalendarEvent>();
 		for (CalendarEvent e: list)
 		{
