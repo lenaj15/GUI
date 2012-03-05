@@ -20,8 +20,8 @@ public abstract class HtmlGenerator {
 	
 	protected Map<Object, ArrayList<CalendarEvent>> outputMap;
 	
-	public final static String FILEPATH = "C:\\Users\\atm15\\Desktop\\";
-	public final static String FOLDER = "subpages\\";
+	public final static String FILEPATH = "";
+	public final static String FOLDER = "subpages/";
 	public final static String FILENAME = "output";
 	public final static String HTML_EXT = ".html";
 	
@@ -123,5 +123,6 @@ public abstract class HtmlGenerator {
 		PrintWriter pw = new PrintWriter(new FileWriter(FILEPATH + FILENAME + HTML_EXT));
 		pw.println(html.toString());
 		pw.close();
+		
 	}
 }

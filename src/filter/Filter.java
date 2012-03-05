@@ -15,11 +15,24 @@ public abstract class Filter {
 		}
 		
 		protected void toggle (CalendarEvent e, boolean include, boolean condition){
-			if (condition)
+			//User wants to include events based on the boolean include value
+			if (include){
+				if (condition)
+					e.toggleIntersect();
+				else
+					e.setisOutput(false);
+			}
+			else{
+				if (condition)
+					e.setisOutput(false);
+				else
+					e.toggleIntersect();
+			}
+			/*if (condition)
 				e.toggleIntersect();
 			else
 				e.setisOutput(false);
 			if (!include)
-				e.reverse();
+				e.reverse();*/
 		}
 }

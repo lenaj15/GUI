@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import parser.TivooParser;
 import parser.TivooParserFactory;
 import event.CalendarEvent;
+import filter.FilterByDates;
 import filter.FilterByKeywords;
 import filter.Sorter;
 
@@ -29,6 +30,16 @@ public class TivooSystem {
 	 */
 	public TivooSystem(){
 		myList = new ArrayList<CalendarEvent>();
+	}
+	
+	/****
+	 * Reset boolean values
+	 * @param s
+	 */
+	public void resetisOutput(){
+		for (CalendarEvent e: myList){
+			e.setisOutput(true);
+		}
 	}
 	
 	/***
@@ -54,33 +65,56 @@ public class TivooSystem {
 	 * Filters by an arraylist of multiple keywords
 	 * @param query
 	 */
-	public void filterByKeywords(ArrayList<String> query){
+	public void filterByKeywords(ArrayList<String> query, boolean val){
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, query, true);
+		myList = filterer.filter(myList, query, val);
+		
 	}
 	
 	/****
 	 * Filters by single keywords
 	 * @param s
 	 */
-	public void filterByKeyWords(String s){
+	public void filterByKeyWords(String s, boolean val){
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(s);
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, list, true);
-		printList();
+		myList = filterer.filter(myList, list, val);
+		
 	}
 
 	/****
 	 * Filters by single keywords in a specific attribute
 	 * @param s
 	 */
-	public void filterByKeyWords(String s, String attribute){
+	public void filterByKeyWords(String s, String attribute, boolean val){
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(s);
 		FilterByKeywords filterer = new FilterByKeywords();
-		myList = filterer.filter(myList, list, true, attribute);
-		printList();
+		myList = filterer.filter(myList, list, val, attribute);
+		
+	}
+
+	/****
+	 * Filters by date period
+	 * @param s
+	 */
+	public void filterByDates(int syear, int smonth, int sday, int shour, int smin, int eyear, int emonth, int eday, int ehour, int emin, boolean val){
+		
+		FilterByDates filterer = new FilterByDates();
+		myList = filterer.filter(myList, new DateTime(syear, smonth, sday, shour, smin), new DateTime(eyear, emonth, eday, ehour, emin), val);
+		
+	}
+	
+	/****
+	 * Filters by date period, taking in datetime objects
+	 * @param s
+	 */
+	public void filterByDates(DateTime start, DateTime end, boolean val){
+		
+		FilterByDates filterer = new FilterByDates();
+		myList = filterer.filter(myList, start, end, val);
+		
 	}
 
 	
@@ -90,6 +124,13 @@ public class TivooSystem {
 	 */
 	public void sortByTitle(){
 		Sorter.sortByTitle(myList);
+		
+	}
+	
+	public void sortByTitleDesc(){
+		
+		Sorter.sortByTitleDescend(myList);
+		
 	}
 	
 	/****
@@ -98,8 +139,13 @@ public class TivooSystem {
 	 */
 	public void sortByStartDate(){
 		Sorter.sortByStart(myList);
+		
 	}
 	
+	public void sortByStartDesc(){
+		Sorter.sortByStartDescend(myList);
+		
+	}
 	
 	/****
 	 * Prints out list of CalendarEvents, debugging purposes

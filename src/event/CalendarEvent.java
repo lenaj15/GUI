@@ -129,6 +129,7 @@ public class CalendarEvent {
 				return event1.myEndTime.compareTo(event2.myEndTime);
 			}
 		});
+		
 		private Comparator<CalendarEvent> myComparator;
 
 		private sortType(Comparator<CalendarEvent> comparator) {

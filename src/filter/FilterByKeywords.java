@@ -15,20 +15,18 @@ public class FilterByKeywords extends Filter {
 
 				boolean title = e.getMyTitle().contains(s);
 				boolean summaries = e.getMySummaries().contains(s);
-	
-				super.toggle(e, include, title);
-				super.toggle(e, include, summaries);
-					
+				boolean condition = true;
 				for (String attribute : e.getAttributeMap().keySet()){
 					for (String entry : e.getAttributeMap().get(attribute)) {
-						boolean condition = entry.contains(s);
-						super.toggle(e, include, condition);
+						condition = entry.contains(s);
 						if (e.getisOutput())
 							break;
 					}
 					if (e.getisOutput())
 						break;
 				}
+				boolean finalcond = title | summaries | condition;
+				super.toggle(e, include, finalcond);
 			}
 		}
 		return list;
